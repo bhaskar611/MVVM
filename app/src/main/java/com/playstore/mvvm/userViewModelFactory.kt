@@ -8,8 +8,8 @@ class userViewModelFactory constructor(private val usersRepository: usersReposit
     : ViewModelProvider.Factory
 {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return if (modelClass.isAssignableFrom(usersViewModel::class.java)) {
-                usersViewModel(this.usersRepository) as T
+        return if (modelClass.isAssignableFrom(UsersViewModel::class.java)) {
+                UsersViewModel(this.usersRepository) as T
         } else{
              throw IllegalArgumentException("ViewModel Not Found")
         }

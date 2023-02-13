@@ -2,11 +2,14 @@ package com.playstore.mvvm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class usersViewModel(private val usersRepository: usersRepository) : ViewModel() {
+@HiltViewModel
+class UsersViewModel  @Inject constructor(private val usersRepository: usersRepository) : ViewModel() {
     val userList = MutableLiveData<List<User>>()
     val errorMsg = MutableLiveData<String>()
 

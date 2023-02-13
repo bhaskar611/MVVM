@@ -2,21 +2,18 @@ package com.playstore.mvvm
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.playstore.mvvm.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var adapter: ListAdapter
     private lateinit var recyclerView: RecyclerView
@@ -24,8 +21,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userDao: UserDao
     private lateinit var userDataBase: UserDataBase
     private val userApi = RetrofitHelper.getInstance().create(UserInterface::class.java)
-    lateinit var viewModel: usersViewModel
-    lateinit var dBViewModel: UsersDBViewModel
+  //  lateinit var viewModel: usersViewModel
+ //   lateinit var dBViewModel: UsersDBViewModel
 
     private lateinit var binding: ActivityMainBinding
 
@@ -47,9 +44,9 @@ class MainActivity : AppCompatActivity() {
         userDataBase = UserDataBase.getInstance(this)
         userDao = userDataBase.userDao()
 
-        viewModel = ViewModelProvider(this,userViewModelFactory(usersRepository(userApi))).get(usersViewModel::class.java)
+      val  viewModel = ViewModelProvider(this).get(UsersViewModel::class.java)
 
-        dBViewModel = ViewModelProvider(this,UserViewDBModelFactory(UserDBRepository(userDao))).get(UsersDBViewModel::class.java)
+      val  dBViewModel = ViewModelProvider(this).get(UsersDBViewModel::class.java)
 
 
         viewModel.userList.observe(this, Observer {

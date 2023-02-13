@@ -1,6 +1,8 @@
 package com.playstore.mvvm
 
-class usersRepository constructor(private val userInterface: UserInterface) {
+import javax.inject.Inject
+
+class usersRepository @Inject constructor(private val userInterface: UserInterface) {
 
     fun getAllUsers() = userInterface.getPosts()
 }
